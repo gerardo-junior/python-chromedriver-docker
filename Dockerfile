@@ -1,4 +1,6 @@
-FROM python:3.6
+ARG PYTHON_ENV=3.6
+
+FROM python:$PYTHON_ENV
 
 # install google chrome
 ARG CHROME_VERSION=71.0.3578.98-1
@@ -31,4 +33,4 @@ WORKDIR /src
 # Create entrypoint
 COPY ./tools /opt/tools
 RUN chmod -R +x /opt/tools/
-ENTRYPOINT /opt/tools/entrypoint.sh                  
+ENTRYPOINT ["/bin/sh", "/opt/tools/entrypoint.sh"]               
