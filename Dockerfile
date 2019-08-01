@@ -3,7 +3,7 @@ ARG PYTHON_ENV=3.6
 FROM python:$PYTHON_ENV
 
 # install google chrome
-ARG CHROME_VERSION=71.0.3578.98-1
+ARG CHROME_VERSION=76.0.3809.87-1
 RUN set -xe && \
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
@@ -23,6 +23,9 @@ RUN set -xe && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/ && \
     rm /tmp/chromedriver.zip && \
     apt-get autoremove -yqq unzip
+
+# Clean cache
+RUN apt-get -y autoclean
 
 # set display port to avoid crash
 ENV DISPLAY=:99
